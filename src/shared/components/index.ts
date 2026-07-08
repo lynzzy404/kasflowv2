@@ -7,6 +7,9 @@ export * from './primitive'
 // Composite Layer (Layer 2)
 export * from './composite'
 
+// Business Layer (Layer 3)
+export * from './business'
+
 // Layout (special - app-level)
 export { default as MainLayout } from './layout/MainLayout'
 export { default as ErrorBoundary } from './layout/ErrorBoundary'

@@ -1,0 +1,13 @@
+.state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3);
+  min-height: var(--touch-target);
+}
+
+.loading,
+.empty {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}

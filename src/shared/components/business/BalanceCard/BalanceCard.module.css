@@ -1,0 +1,64 @@
+.card {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-1);
+}
+
+.title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.trend.up {
+  color: var(--color-financial-positive);
+}
+
+.trend.down {
+  color: var(--color-financial-negative);
+}
+
+.trend.flat {
+  color: var(--color-financial-neutral);
+}
+
+.amount {
+  display: block;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.5px;
+  margin-bottom: var(--spacing-1);
+}
+
+.subtitle {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* Variants */
+.positive .amount {
+  color: var(--color-financial-positive);
+}
+
+.negative .amount {
+  color: var(--color-financial-negative);
+}
+
+.neutral .amount {
+  color: var(--color-text-primary);
+}
