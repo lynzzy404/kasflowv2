@@ -1,0 +1,67 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 0 var(--spacing-3);
+  transition: all var(--motion-fast) var(--motion-easing);
+}
+
+.searchBar:focus-within {
+  border-color: var(--color-action-primary);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.15);
+}
+
+.icon {
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: var(--spacing-2) 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  outline: none;
+  min-height: var(--touch-target);
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Remove search clear button in Webkit */
+.input::-webkit-search-decoration,
+.input::-webkit-search-cancel-button,
+.input::-webkit-search-results-button,
+.input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-full);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  flex-shrink: 0;
+  border: none;
+  background: none;
+}
+
+.clear:hover {
+  background-color: var(--color-surface-tertiary);
+  color: var(--color-text-secondary);
+}

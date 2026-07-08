@@ -1,12 +1,14 @@
-// Shared Components - Centralized exports
-// Foundation components only - no business features
+// UI System - Centralized exports
+// Layer structure: Primitive → Composite → Business → Screens
 
-export { default as FAB } from './FAB'
-export { default as BottomNav } from './BottomNav'
-export { default as NotFound } from './NotFound'
-export { default as ToastContainer } from './ToastContainer'
-export { SkeletonBlock, PageSkeleton, CardSkeleton } from './LoadingSkeleton'
+// Primitive Layer (Layer 1)
+export * from './primitive'
 
-// Layout
+// Composite Layer (Layer 2)
+export * from './composite'
+
+// Layout (special - app-level)
 export { default as MainLayout } from './layout/MainLayout'
 export { default as ErrorBoundary } from './layout/ErrorBoundary'
+export { default as NotFound } from './NotFound'
+export { default as ToastContainer } from './ToastContainer'

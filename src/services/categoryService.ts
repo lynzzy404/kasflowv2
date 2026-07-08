@@ -28,7 +28,7 @@ export async function addCategory(name: string): Promise<Category> {
     updatedAt: new Date(),
   }
 
-  await db.categories.add(category)
+  await db.categories.put(category)
   return category
 }
 
@@ -50,7 +50,7 @@ export async function editCategory(
     updatedAt: new Date(),
   }
 
-  await db.categories.update(id, updated)
+  await db.categories.put(updated)
   return updated
 }
 

@@ -1,0 +1,86 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--motion-fast) var(--motion-easing);
+  border: 1px solid transparent;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* Sizes */
+.sm {
+  padding: 2px var(--spacing-2);
+  font-size: var(--font-size-xs);
+  min-height: 24px;
+}
+
+.md {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+}
+
+/* Variants */
+.default {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  border-color: transparent;
+}
+
+.default:hover:not(:disabled) {
+  background-color: var(--color-surface-tertiary);
+}
+
+.active {
+  background-color: var(--color-action-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-action-primary);
+}
+
+.active:hover:not(:disabled) {
+  background-color: var(--color-action-hover);
+}
+
+/* Interactive */
+.clickable {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Delete button */
+.delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--motion-fast) var(--motion-easing);
+  line-height: 1;
+}
+
+.delete:hover {
+  opacity: 1;
+}
+
+.default .delete {
+  color: var(--color-text-secondary);
+}
+
+.active .delete {
+  color: var(--color-text-inverse);
+}

@@ -16,7 +16,7 @@ const History = lazy(() => import('@/pages/History/History'))
 const AddTransaction = lazy(() => import('@/pages/AddTransaction/AddTransaction'))
 const Settings = lazy(() => import('@/pages/Settings/Settings'))
 
-// Suspense fallback (minimal, per Speed First principle)
+// Minimal Suspense fallback (per Speed First principle)
 const PageLoading: React.FC = () => (
   <div
     style={{
@@ -37,7 +37,12 @@ const App: React.FC = () => {
     <ThemeProvider>
       <AppProvider>
         <ErrorBoundary>
-          <Router>
+          <Router
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
             <Suspense fallback={<PageLoading />}>
               <Routes>
                 <Route element={<MainLayout />}>

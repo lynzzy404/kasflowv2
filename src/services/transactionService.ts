@@ -46,11 +46,8 @@ export async function addTransaction(
     updatedAt: new Date(),
   }
 
-  const id = await db.transactions.add(newTransaction)
-  const saved = await db.transactions.get(id)
-
-  if (!saved) throw new Error('Failed to save transaction')
-  return saved
+  await db.transactions.put(newTransaction)
+  return newTransaction
 }
 
 /**
@@ -76,7 +73,7 @@ export async function editTransaction(
     throw new Error(`Validation failed: ${validation.errors.join(', ')}`)
   }
 
-  await db.transactions.update(id, updated)
+  await db.transactions.put(updated)
   return updated
 }
 
@@ -87,7 +84,7 @@ export async function deleteTransaction(id: string): Promise<void> {
   const transaction = await db.transactions.get(id)
   if (!transaction) throw new Error('Transaction not found')
 
-  await db.transactions.update(id, { deleted: true })
+  await db.transactions.put({ ...transaction, deleted: true, updatedAt: new Date() })
 }
 
 /**

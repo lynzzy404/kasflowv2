@@ -37,7 +37,7 @@ export async function addWallet(name: string): Promise<Wallet> {
     updatedAt: new Date(),
   }
 
-  await db.wallets.add(wallet)
+  await db.wallets.put(wallet)
   return wallet
 }
 
@@ -56,7 +56,7 @@ export async function editWallet(id: string, updates: Partial<Wallet>): Promise<
     updatedAt: new Date(),
   }
 
-  await db.wallets.update(id, updated)
+  await db.wallets.put(updated)
   return updated
 }
 
@@ -64,14 +64,32 @@ export async function editWallet(id: string, updates: Partial<Wallet>): Promise<
  * Disable wallet (soft delete)
  */
 export async function disableWallet(id: string): Promise<void> {
-  await db.wallets.update(id, { active: false })
+  const existing = await db.wallets.get(id)
+  if (!existing) throw new Error('Wallet not found')
+
+  const updated: Wallet = {
+    ...existing,
+    active: false,
+    updatedAt: new Date(),
+  }
+
+  await db.wallets.put(updated)
 }
 
 /**
  * Enable wallet
  */
 export async function enableWallet(id: string): Promise<void> {
-  await db.wallets.update(id, { active: true })
+  const existing = await db.wallets.get(id)
+  if (!existing) throw new Error('Wallet not found')
+
+  const updated: Wallet = {
+    ...existing,
+    active: true,
+    updatedAt: new Date(),
+  }
+
+  await db.wallets.put(updated)
 }
 
 /**
