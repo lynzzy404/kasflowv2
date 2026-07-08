@@ -1,0 +1,56 @@
+.container {
+  position: fixed;
+  top: calc(var(--spacing-4) + var(--safe-area-top));
+  left: var(--spacing-4);
+  right: var(--spacing-4);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  pointer-events: none;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.toast {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+  animation: slideIn var(--motion-slow) var(--motion-easing);
+}
+
+.info {
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-default);
+}
+
+.success {
+  background-color: var(--color-status-success);
+  color: var(--color-text-inverse);
+}
+
+.error {
+  background-color: var(--color-status-error);
+  color: var(--color-text-inverse);
+}
+
+.warning {
+  background-color: var(--color-status-warning);
+  color: var(--color-text-inverse);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
