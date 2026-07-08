@@ -1,0 +1,33 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-8);
+  overflow-y: auto;
+  width: 100%;
+}
+
+.balanceSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.walletList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: 0 var(--spacing-4) var(--spacing-2);
+}
+
+.transactionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: 0 var(--spacing-4) var(--spacing-4);
+}
+
+/* Information First: balance section gets most visual weight */
+.balanceSection {
+  margin-bottom: var(--spacing-2);
+}
