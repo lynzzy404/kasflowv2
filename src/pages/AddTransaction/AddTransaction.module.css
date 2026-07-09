@@ -69,10 +69,27 @@
   min-height: var(--touch-target);
 }
 
+.typeBtn:first-child {
+  color: var(--color-financial-negative);
+}
+
+.typeBtn:last-child {
+  color: var(--color-financial-positive);
+}
+
 .typeActive {
   background-color: var(--color-surface-primary);
-  color: var(--color-text-primary);
   box-shadow: var(--shadow-sm);
+}
+
+.typeActive:first-child {
+  color: var(--color-financial-negative);
+  font-weight: var(--font-weight-semibold);
+}
+
+.typeActive:last-child {
+  color: var(--color-financial-positive);
+  font-weight: var(--font-weight-semibold);
 }
 
 .actions {

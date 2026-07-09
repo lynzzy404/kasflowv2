@@ -68,6 +68,12 @@ const Home: React.FC = () => {
   // ── Normal state ────────────────────────────────────────────────
   return (
     <div className={styles.screen}>
+      {/* ── Home Header ────────────────────────────────────────── */}
+      <header className={styles.header}>
+        <h1 className={styles.headerTitle}>KasFlow</h1>
+        <p className={styles.headerSub}>Manage your money together</p>
+      </header>
+
       {/* ── Balance Cards ──────────────────────────────────────── */}
       <section className={styles.balanceSection} aria-label="Balances">
         <BalanceCard

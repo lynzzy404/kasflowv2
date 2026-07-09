@@ -6,6 +6,7 @@ import React from 'react'
 import Card from '@/shared/components/primitive/Card/Card'
 import OwnerBadge from '@/shared/components/business/OwnerBadge/OwnerBadge'
 import { formatCurrency } from '@/utils/formatting'
+import { getWalletIcon } from '@/utils/walletIcons'
 import type { Owner } from '@/types/entities'
 import styles from './WalletCard.module.css'
 
@@ -36,6 +37,9 @@ const WalletCard: React.FC<WalletCardProps> = ({
       className={`${styles.card} ${className || ''}`}
     >
       <div className={styles.header}>
+        <span className={styles.icon}>
+          {React.createElement(getWalletIcon(name), { size: 20 })}
+        </span>
         <span className={styles.name}>{name}</span>
       </div>
 
