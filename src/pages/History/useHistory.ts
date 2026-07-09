@@ -126,13 +126,13 @@ export function useHistory() {
     filters.push({
       type: 'owner',
       id: 'Me',
-      label: '👤 Saya',
+      label: '👤 Gwehj',
       active: ownerFilter === 'Me',
     })
     filters.push({
       type: 'owner',
       id: 'Girlfriend',
-      label: '❤️ Pacar',
+      label: '❤️ Enaa',
       active: ownerFilter === 'Girlfriend',
     })
 
