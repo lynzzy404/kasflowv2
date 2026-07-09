@@ -71,14 +71,14 @@ const Home: React.FC = () => {
       {/* ── Balance Cards ──────────────────────────────────────── */}
       <section className={styles.balanceSection} aria-label="Balances">
         <BalanceCard
-          title="Saldo Pacar"
+          title="Saldo MBG (My Bini Gwehj)"
           amount={girlfriendBalance}
           variant={isGirlfriendNegative ? 'negative' : 'positive'}
           subtitle={isGirlfriendNegative ? 'Perlu Ditagih' : undefined}
         />
 
         <BalanceCard
-          title="Saldo Saya"
+          title="Saldo Gwehj"
           amount={myBalance}
           variant="neutral"
         />

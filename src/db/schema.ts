@@ -132,8 +132,8 @@ export async function initializeDatabase(): Promise<void> {
       // Seed wallets (3 initial wallets)
       await db.wallets.bulkPut([
         { id: 'wallet_seabank', name: 'SeaBank', active: true, createdAt: now, updatedAt: now },
-        { id: 'wallet_cash_me', name: 'Cash Me', active: true, createdAt: now, updatedAt: now },
-        { id: 'wallet_cash_gf', name: 'Cash Girlfriend', active: true, createdAt: now, updatedAt: now },
+        { id: 'wallet_cash_me', name: 'Cash Gwehj', active: true, createdAt: now, updatedAt: now },
+        { id: 'wallet_cash_gf', name: 'Cash Enaa', active: true, createdAt: now, updatedAt: now },
       ])
 
       // Seed categories (6 initial categories)

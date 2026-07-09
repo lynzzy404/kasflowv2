@@ -58,7 +58,6 @@ kasflow-v2/
 │   ├── styles/             # Global styles & design tokens
 │   └── App.tsx             # Root component with routing
 ├── public/                 # PWA manifest, icons
-├── docs/                   # Project documentation
 └── package.json            # Dependencies & scripts
 ```
 
