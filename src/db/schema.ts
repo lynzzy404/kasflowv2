@@ -17,10 +17,12 @@ import Dexie, { Table } from 'dexie'
 import type { Owner, Wallet, Transaction, Category } from '@/types/entities'
 
 // ──── SCHEMA VERSION ──────────────────────────────────────────────
-// Current: 1
-// When adding a new version, increment this constant and add a
-// version(N+1).stores({...}) call with an upgrade() callback.
-const SCHEMA_VERSION = 1
+// Migration chain:
+//   v1 — initial schema
+//   v2 — added index for categoryId on transactions
+//   v3 — fixed: v2's definition was modified in-place previously,
+//        causing SchemaDiff warnings. v3 re-declares the correct
+//        schema so Dexie reconciles the physical index.
 const DB_NAME = 'kasflow_db'
 
 // ──── TABLE TYPES ──────────────────────────────────────────────────
@@ -51,14 +53,30 @@ export class KasflowDB extends Dexie {
     super(DB_NAME)
 
     // ── Schema v1 ──────────────────────────────────────────────────
-    // Owners:     'id'                         — string key (Me/Girlfriend)
-    // Wallets:    'id'                         — string key (wallet_seabank/...)
-    // Categories: 'id'                         — string key (category_1/...)
-    // Transactions: 'id, walletId, owner, date' — string key, indexed by walletId/owner/date
-    this.version(SCHEMA_VERSION).stores({
+    // Original: transactions indexed by id, walletId, owner, date
+    this.version(1).stores({
       owners: 'id',
       wallets: 'id',
       transactions: 'id, walletId, owner, date',
+      categories: 'id',
+    })
+
+    // ── Schema v2 ──────────────────────────────────────────────────
+    // ⚠️ DO NOT MODIFY — matches the schema deployed to users.
+    // This version was originally released without categoryId.
+    this.version(2).stores({
+      owners: 'id',
+      wallets: 'id',
+      transactions: 'id, walletId, owner, date',
+      categories: 'id',
+    })
+
+    // ── Schema v3 — add categoryId index to transactions ───────────
+    // NEVER modify v1 or v2 stores definition. Always add a new version.
+    this.version(3).stores({
+      owners: 'id',
+      wallets: 'id',
+      transactions: 'id, walletId, owner, date, categoryId',
       categories: 'id',
     })
   }

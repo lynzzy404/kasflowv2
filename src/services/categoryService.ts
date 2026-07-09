@@ -56,10 +56,16 @@ export async function editCategory(
 
 /**
  * Delete category (only if no transactions use it)
+ * Excludes soft-deleted transactions from the count.
  */
 export async function deleteCategory(id: string): Promise<void> {
-  const count = await db.transactions.where('categoryId').equals(id).count()
-  if (count > 0) {
+  const transactionsWithCategory = await db.transactions
+    .where('categoryId')
+    .equals(id)
+    .filter((t) => !t.deleted)
+    .toArray()
+
+  if (transactionsWithCategory.length > 0) {
     throw new Error('Cannot delete category with existing transactions')
   }
 

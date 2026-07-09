@@ -26,7 +26,7 @@ const BottomNav: React.FC = () => {
       {navItems.map((item) => (
         <button
           key={item.path}
-          className={`${styles.item} ${location.pathname === item.path ? styles.active : ''}`}
+          className={`${styles.item} ${location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)) ? styles.active : ''}`}
           onClick={() => navigate(item.path)}
           aria-label={item.label}
           title={item.label}

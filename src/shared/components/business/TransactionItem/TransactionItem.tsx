@@ -7,6 +7,20 @@ import Card from '@/shared/components/primitive/Card/Card'
 import OwnerBadge from '@/shared/components/business/OwnerBadge/OwnerBadge'
 import { formatCurrency } from '@/utils/formatting'
 import type { Owner, TransactionType } from '@/types/entities'
+
+// Extensible category icon map — add new entries here as categories grow
+const CATEGORY_ICONS: Record<string, string> = {
+  Makan: '🍔',
+  Belanja: '🛒',
+  Bensin: '⛽',
+  Tagihan: '📄',
+  Gaji: '💰',
+  Kuota: '📡',
+}
+
+export function getCategoryIcon(categoryName: string): string {
+  return CATEGORY_ICONS[categoryName] || '💳'
+}
 import styles from './TransactionItem.module.css'
 
 export interface TransactionItemProps {
@@ -29,11 +43,12 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
   owner,
   walletName,
   categoryName,
-  categoryIcon = '💳',
+  categoryIcon,
   note,
   onClick,
   className,
 }) => {
+  const resolvedIcon = categoryIcon || getCategoryIcon(categoryName)
   const isIncome = type === 'Income'
 
   return (
@@ -43,7 +58,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({
       className={`${styles.item} ${className || ''}`}
     >
       <div className={styles.iconCell}>
-        <span className={styles.icon} aria-hidden="true">{categoryIcon}</span>
+        <span className={styles.icon} aria-hidden="true">{resolvedIcon}</span>
       </div>
 
       <div className={styles.body}>

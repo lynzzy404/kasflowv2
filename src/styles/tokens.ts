@@ -2,7 +2,7 @@
 // Reference: docs/02-design/04_DESIGN_TOKENS.md
 // Layer: Primitive → Semantic → Component → UI
 
-export const tokens = {
+export const lightTokens = {
   colors: {
     surface: {
       primary: '#FFFFFF',
@@ -72,27 +72,13 @@ export const tokens = {
   },
 
   spacing: {
-    0: '0px',
-    1: '4px',
-    2: '8px',
-    3: '12px',
-    4: '16px',
-    5: '20px',
-    6: '24px',
-    8: '32px',
-    10: '40px',
-    12: '48px',
-    16: '64px',
+    0: '0px', 1: '4px', 2: '8px', 3: '12px', 4: '16px',
+    5: '20px', 6: '24px', 8: '32px', 10: '40px', 12: '48px', 16: '64px',
   },
 
   radius: {
-    none: '0px',
-    xs: '4px',
-    sm: '8px',
-    md: '12px',
-    lg: '16px',
-    xl: '24px',
-    full: '9999px',
+    none: '0px', xs: '4px', sm: '8px', md: '12px',
+    lg: '16px', xl: '24px', full: '9999px',
   },
 
   shadow: {
@@ -105,41 +91,66 @@ export const tokens = {
   },
 
   motion: {
-    fast: '100ms',
-    base: '150ms',
-    slow: '200ms',
-    verySlow: '300ms',
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fast: '100ms', base: '150ms', slow: '200ms',
+    verySlow: '300ms', easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
   },
 
-  breakpoints: {
-    mobile: '375px',
-    tablet: '768px',
-    desktop: '1024px',
-  },
+  breakpoints: { mobile: '375px', tablet: '768px', desktop: '1024px' },
 
   zIndex: {
-    hide: -1,
-    base: 0,
-    dropdown: 1000,
-    sticky: 1020,
-    fixed: 1030,
-    modalBackdrop: 1035,
-    modal: 1040,
-    popover: 1050,
-    tooltip: 1060,
-    toast: 1070,
+    hide: -1, base: 0, dropdown: 1000, sticky: 1020,
+    fixed: 1030, modalBackdrop: 1035, modal: 1040,
+    popover: 1050, tooltip: 1060, toast: 1070,
   },
 
-  // Layout constants
-  layout: {
-    touchTarget: '44px',
-    navHeight: '60px',
-    maxContentWidth: '600px',
+  layout: { touchTarget: '44px', navHeight: '60px', maxContentWidth: '600px' },
+}
+
+export const darkTokens: typeof lightTokens = {
+  ...lightTokens,
+  colors: {
+    surface: {
+      primary: '#1C1C1E',
+      secondary: '#2C2C2E',
+      tertiary: '#3A3A3C',
+      hover: '#2C2C30',
+      active: '#3A3A3E',
+    },
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#AEAEB2',
+      tertiary: '#636366',
+      disabled: '#48484A',
+      inverse: '#000000',
+    },
+    action: {
+      primary: '#0A84FF',
+      secondary: '#3A3A3C',
+      disabled: '#48484A',
+      hover: '#409CFF',
+    },
+    status: {
+      success: '#30D158',
+      warning: '#FF9F0A',
+      error: '#FF453A',
+      info: '#5AC8FA',
+    },
+    financial: {
+      positive: '#30D158',
+      negative: '#FF453A',
+      neutral: '#AEAEB2',
+    },
+    border: {
+      default: '#48484A',
+      light: '#38383A',
+      strong: '#636366',
+    },
   },
 }
 
-export type Tokens = typeof tokens
+export const tokens = lightTokens
+
+export type Tokens = typeof lightTokens
 export type ThemeColor = keyof typeof tokens.colors
 
 export default tokens

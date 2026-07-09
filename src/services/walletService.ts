@@ -93,11 +93,30 @@ export async function enableWallet(id: string): Promise<void> {
 }
 
 /**
- * Check if wallet has transactions
+ * Check if wallet has transactions (excluding soft-deleted)
  */
 export async function walletHasTransactions(walletId: string): Promise<boolean> {
-  const count = await db.transactions.where('walletId').equals(walletId).count()
-  return count > 0
+  const transactions = await db.transactions
+    .where('walletId')
+    .equals(walletId)
+    .filter((t) => !t.deleted)
+    .toArray()
+  return transactions.length > 0
+}
+
+/**
+ * Delete wallet (only if it has no transactions)
+ */
+export async function deleteWallet(id: string): Promise<void> {
+  const existing = await db.wallets.get(id)
+  if (!existing) throw new Error('Wallet not found')
+
+  const hasTxn = await walletHasTransactions(id)
+  if (hasTxn) {
+    throw new Error('Cannot delete wallet with existing transactions')
+  }
+
+  await db.wallets.delete(id)
 }
 
 export default {
