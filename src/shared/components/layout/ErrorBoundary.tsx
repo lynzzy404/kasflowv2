@@ -50,7 +50,7 @@ class ErrorBoundary extends Component<Props, State> {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '100vh',
+            minHeight: '100dvh',
             padding: '24px',
             textAlign: 'center',
             fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',

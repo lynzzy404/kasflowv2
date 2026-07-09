@@ -1,10 +1,9 @@
 .screen {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  flex: 1;
   padding: var(--spacing-4);
   gap: var(--spacing-4);
-  overflow-y: auto;
 }
 
 .header {

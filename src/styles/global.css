@@ -130,6 +130,7 @@
 }
 
 html {
+  height: 100%;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -137,17 +138,17 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-y: auto;
 }
 
 html,
 body,
 #root {
   width: 100%;
-  min-height: 100dvh;
+  height: 100%;
 }
 
 body {
+  height: 100dvh;
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
@@ -157,11 +158,15 @@ body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
   padding-top: var(--safe-area-top);
   padding-bottom: var(--safe-area-bottom);
+}
+
+#root {
+  height: 100dvh;
+  overflow: hidden;
 }
 
 

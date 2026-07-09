@@ -29,9 +29,12 @@ const Settings: React.FC = () => {
     categories,
     categoryModal,
     openAddCategory,
+    openEditCategory,
     closeCategoryModal,
     saveCategory,
     removeCategory,
+    showCategoryDeleteConfirm,
+    setShowCategoryDeleteConfirm,
     setCategoryName,
     backingUp,
     handleBackup,
@@ -117,7 +120,7 @@ const Settings: React.FC = () => {
             <ListItem
               key={c.id}
               title={c.name}
-              onClick={() => removeCategory(c.id)}
+              onClick={() => openEditCategory(c.id, c.name)}
             />
           ))}
         </div>
@@ -236,7 +239,7 @@ const Settings: React.FC = () => {
       <Modal
         open={categoryModal.open}
         onClose={closeCategoryModal}
-        title="Tambah Kategori"
+        title={categoryModal.editId ? 'Edit Kategori' : 'Tambah Kategori'}
         size="sm"
       >
         <div className={styles.modalForm}>
@@ -250,8 +253,30 @@ const Settings: React.FC = () => {
           <Button variant="primary" size="md" fullWidth onClick={saveCategory}>
             Simpan
           </Button>
+          {categoryModal.editId && (
+            <Button
+              variant="destructive"
+              size="md"
+              fullWidth
+              onClick={() => setShowCategoryDeleteConfirm(true)}
+            >
+              Hapus Kategori
+            </Button>
+          )}
         </div>
       </Modal>
+
+      {/* ── Category delete confirmation ────────────────────────── */}
+      <ConfirmDialog
+        open={showCategoryDeleteConfirm}
+        onClose={() => setShowCategoryDeleteConfirm(false)}
+        onConfirm={removeCategory}
+        title="Hapus Kategori"
+        message="Apakah Anda yakin ingin menghapus kategori ini?"
+        confirmLabel="Hapus"
+        cancelLabel="Batal"
+        variant="destructive"
+      />
     </div>
   )
 }

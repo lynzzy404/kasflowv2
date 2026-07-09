@@ -6,7 +6,7 @@ import { useAppContext } from '@store/AppContext'
 import { useTheme } from '@styles/ThemeContext'
 import { db } from '@db/schema'
 import { addWallet, editWallet, deleteWallet as deleteWalletSvc } from '@services/walletService'
-import { addCategory, deleteCategory as deleteCategorySvc } from '@services/categoryService'
+import { addCategory, editCategory as editCategorySvc, deleteCategory as deleteCategorySvc } from '@services/categoryService'
 import {
   exportBackup,
   downloadBackup,
@@ -64,17 +64,23 @@ export function useSettings() {
   }, [dispatch])
 
   // ── Category ────────────────────────────────────────────────────
-  const [categoryModal, setCategoryModal] = useState<{ open: boolean; name: string }>({
-    open: false,
-    name: '',
-  })
+  const [categoryModal, setCategoryModal] = useState<{
+    open: boolean
+    editId?: string
+    name: string
+  }>({ open: false, name: '' })
+  const [showCategoryDeleteConfirm, setShowCategoryDeleteConfirm] = useState(false)
 
   const openAddCategory = useCallback(() => {
     setCategoryModal({ open: true, name: '' })
   }, [])
 
+  const openEditCategory = useCallback((id: string, name: string) => {
+    setCategoryModal({ open: true, editId: id, name })
+  }, [])
+
   const closeCategoryModal = useCallback(() => {
-    setCategoryModal({ open: false, name: '' })
+    setCategoryModal({ open: false, editId: undefined, name: '' })
   }, [])
 
   const saveCategory = useCallback(async () => {
@@ -82,23 +88,30 @@ export function useSettings() {
     if (!name) return
 
     try {
-      const created = await addCategory(name)
-      dispatch({ type: 'ADD_CATEGORY', payload: created })
+      if (categoryModal.editId) {
+        const updated = await editCategorySvc(categoryModal.editId, { name })
+        dispatch({ type: 'EDIT_CATEGORY', payload: updated })
+      } else {
+        const created = await addCategory(name)
+        dispatch({ type: 'ADD_CATEGORY', payload: created })
+      }
       closeCategoryModal()
     } catch (err) {
       console.error('[Settings] Save category failed:', err)
     }
   }, [categoryModal, dispatch, closeCategoryModal])
 
-  const removeCategory = useCallback(async (id: string) => {
+  const removeCategory = useCallback(async () => {
+    if (!categoryModal.editId) return
+    setShowCategoryDeleteConfirm(false)
     try {
-      await deleteCategorySvc(id)
-      dispatch({ type: 'DELETE_CATEGORY', payload: id })
+      await deleteCategorySvc(categoryModal.editId)
+      dispatch({ type: 'DELETE_CATEGORY', payload: categoryModal.editId })
+      closeCategoryModal()
     } catch (err) {
-      console.error('[Settings] Delete category failed:', err)
       alert('Kategori tidak dapat dihapus karena masih memiliki transaksi')
     }
-  }, [dispatch])
+  }, [categoryModal.editId, dispatch, closeCategoryModal])
 
   // ── Reset Data ───────────────────────────────────────────────────
   const [showResetConfirm, setShowResetConfirm] = useState(false)
@@ -185,9 +198,12 @@ export function useSettings() {
     categories: state.categories,
     categoryModal,
     openAddCategory,
+    openEditCategory,
     closeCategoryModal,
     saveCategory,
     removeCategory,
+    showCategoryDeleteConfirm,
+    setShowCategoryDeleteConfirm,
     setCategoryName: (name: string) => setCategoryModal((prev) => ({ ...prev, name })),
 
     // Backup
