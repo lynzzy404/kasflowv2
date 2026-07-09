@@ -82,16 +82,10 @@
 
 .helperChip {
   font-size: var(--font-size-xs);
-  color: var(--color-action-primary);
-  background-color: rgba(0, 122, 255, 0.08);
+  color: var(--color-text-tertiary);
+  background-color: var(--color-surface-secondary);
   padding: 2px var(--spacing-2);
   border-radius: var(--radius-xs);
-  cursor: pointer;
-  transition: background-color var(--motion-fast) var(--motion-easing);
-}
-
-.helperChip:hover {
-  background-color: rgba(0, 122, 255, 0.15);
 }
 
 /* ── Filter Rows ───────────────────────────── */
@@ -163,12 +157,21 @@
 
 /* ── Bulk Delete ──────────────────────────── */
 .bulkBar {
+  position: fixed;
+  bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: calc(var(--max-content-width) - var(--spacing-6));
+  padding: var(--spacing-2);
+  z-index: 999;
+}
+
+.bulkBtnInner {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-2);
-  background-color: var(--color-status-error);
-  border-radius: var(--radius-sm);
+  gap: var(--spacing-2);
 }
 
 .clearFilters {

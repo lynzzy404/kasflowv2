@@ -11,7 +11,10 @@
 .icon {
   font-size: 40px;
   margin-bottom: var(--spacing-4);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
 }
 
 .title {

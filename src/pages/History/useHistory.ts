@@ -90,8 +90,8 @@ export function useHistory() {
 
   const ownerFilters = useMemo(() => {
     return [
-      { id: 'Me' as Owner, label: '👤 Gwehj', active: ownerFilter === 'Me' },
-      { id: 'Girlfriend' as Owner, label: '❤️ Enaa', active: ownerFilter === 'Girlfriend' },
+      { id: 'Me' as Owner, label: '👤Gwehj', active: ownerFilter === 'Me' },
+      { id: 'Girlfriend' as Owner, label: '💖Enaa', active: ownerFilter === 'Girlfriend' },
     ]
   }, [ownerFilter])
 

@@ -4,6 +4,7 @@
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AlertTriangle, Inbox } from 'lucide-react'
 import BalanceCard from '@/shared/components/business/BalanceCard/BalanceCard'
 import WalletCard from '@/shared/components/business/WalletCard/WalletCard'
 import TransactionItem from '@/shared/components/business/TransactionItem/TransactionItem'
@@ -55,7 +56,7 @@ const Home: React.FC = () => {
     return (
       <div className={styles.screen}>
         <EmptyState
-          icon="⚠️"
+          icon={<AlertTriangle size={40} />}
           title="Terjadi Kesalahan"
           message={error}
           actionLabel="Coba Lagi"
@@ -118,7 +119,7 @@ const Home: React.FC = () => {
         <SectionHeader title="Transaksi Terbaru" />
         {recentTransactions.length === 0 ? (
           <EmptyState
-            icon="📭"
+            icon={<Inbox size={40} />}
             title="Belum ada transaksi"
             message="Tekan tombol + untuk mencatat transaksi pertama"
             actionLabel="Tambah Transaksi"

@@ -4,6 +4,7 @@
 // Reference: docs/01-product/01_INFORMATION_ARCHITECTURE.md (Fields section)
 
 import React from 'react'
+import { AlertTriangle } from 'lucide-react'
 import FormField from '@/shared/components/composite/FormField/FormField'
 import Select from '@/shared/components/primitive/Select/Select'
 import Input from '@/shared/components/primitive/Input/Input'
@@ -41,7 +42,7 @@ const AddTransaction: React.FC = () => {
       <div className={styles.screen}>
         {error ? (
           <EmptyState
-            icon="⚠️"
+            icon={<AlertTriangle size={40} />}
             title="Terjadi Kesalahan"
             message={error}
             actionLabel="Coba Lagi"

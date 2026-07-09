@@ -3,6 +3,7 @@
 // Built from: Input + IconButton
 
 import React from 'react'
+import { Search } from 'lucide-react'
 import styles from './SearchBar.module.css'
 
 export interface SearchBarProps {
@@ -10,6 +11,7 @@ export interface SearchBarProps {
   onChange: (value: string) => void
   placeholder?: string
   onClear?: () => void
+  icon?: React.ReactNode
   className?: string
 }
 
@@ -18,11 +20,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   placeholder = 'Search...',
   onClear,
+  icon,
   className,
 }) => {
   return (
     <div className={`${styles.searchBar} ${className || ''}`}>
-      <span className={styles.icon} aria-hidden="true">🔍</span>
+      <span className={styles.icon} aria-hidden="true">{icon || <Search size={16} />}</span>
       <input
         type="search"
         className={styles.input}

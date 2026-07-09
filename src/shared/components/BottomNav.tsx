@@ -3,18 +3,19 @@
 
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Home, History, Settings } from 'lucide-react'
 import styles from './BottomNav.module.css'
 
 interface NavItem {
   path: string
   label: string
-  icon: string // Unicode icon
+  icon: React.ReactNode
 }
 
 const navItems: NavItem[] = [
-  { path: '/', label: 'Home', icon: '🏠' },
-  { path: '/history', label: 'History', icon: '📋' },
-  { path: '/settings', label: 'Settings', icon: '⚙️' },
+  { path: '/', label: 'Home', icon: <Home size={24} /> },
+  { path: '/history', label: 'History', icon: <History size={24} /> },
+  { path: '/settings', label: 'Settings', icon: <Settings size={24} /> },
 ]
 
 const BottomNav: React.FC = () => {

@@ -3,6 +3,7 @@
 // Reference: docs/01-product/01_INFORMATION_ARCHITECTURE.md
 
 import React from 'react'
+import { AlertTriangle } from 'lucide-react'
 import ListItem from '@/shared/components/composite/ListItem/ListItem'
 import SectionHeader from '@/shared/components/composite/SectionHeader/SectionHeader'
 import Button from '@/shared/components/primitive/Button/Button'
@@ -64,7 +65,7 @@ const Settings: React.FC = () => {
     return (
       <div className={styles.screen}>
         <EmptyState
-          icon="⚠️"
+          icon={<AlertTriangle size={40} />}
           title="Terjadi Kesalahan"
           message={error}
           actionLabel="Coba Lagi"

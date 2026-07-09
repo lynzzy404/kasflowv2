@@ -2,6 +2,7 @@
 // Dual mode: Normal (header + count, no checkboxes) / Selection (checkboxes + bulk delete)
 import React, { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AlertTriangle, HelpCircle } from 'lucide-react'
 import SearchBar from '@/shared/components/composite/SearchBar/SearchBar'
 import TransactionItem from '@/shared/components/business/TransactionItem/TransactionItem'
 import EmptyState from '@/shared/components/composite/EmptyState/EmptyState'
@@ -39,9 +40,7 @@ const History: React.FC = () => {
   }, [])
 
   const handleTxnNavigate = useCallback((txnId: string) => {
-    if (!isSelecting) {
-      navigate(`/add?edit=${txnId}`)
-    }
+    if (!isSelecting) navigate(`/add?edit=${txnId}`)
   }, [isSelecting, navigate])
 
   const handleContextMenu = useCallback((e: React.MouseEvent, id: string) => {
@@ -63,7 +62,7 @@ const History: React.FC = () => {
   if (error) {
     return (
       <div className={styles.screen}>
-        <EmptyState icon="⚠️" title="Terjadi Kesalahan" message={error}
+        <EmptyState icon={<AlertTriangle size={40} />} title="Terjadi Kesalahan" message={error}
           actionLabel="Coba Lagi" onAction={() => window.location.reload()} />
       </div>
     )
@@ -77,14 +76,8 @@ const History: React.FC = () => {
           <button className={styles.cancelBtn} onClick={exitSelectionMode} type="button">
             Cancel
           </button>
-          <span className={styles.selectionCount}>
-            {selectedCount} Selected
-          </span>
-          <Checkbox
-            checked={allSelected}
-            onChange={toggleSelectAll}
-            ref={undefined as never}
-          />
+          <span className={styles.selectionCount}>{selectedCount} Selected</span>
+          <Checkbox checked={allSelected} onChange={toggleSelectAll} ref={undefined as never} />
         </div>
       ) : (
         <div className={styles.normalHeader}>
@@ -95,7 +88,7 @@ const History: React.FC = () => {
         </div>
       )}
 
-      {/* Search + helpers (only in normal mode) */}
+      {/* Search + helpers (normal mode only) */}
       {!isSelecting && (
         <div className={styles.searchArea}>
           <SearchBar value={searchText} onChange={setSearchText}
@@ -105,9 +98,7 @@ const History: React.FC = () => {
               <span className={styles.helperLabel}>Cari berdasarkan:</span>
               <div className={styles.helperChips}>
                 {SEARCH_HELPERS.map((h) => (
-                  <span key={h} className={styles.helperChip} onClick={() => setSearchText(h.toLowerCase())}>
-                    {h}
-                  </span>
+                  <span key={h} className={styles.helperChip}>{h}</span>
                 ))}
               </div>
             </div>
@@ -115,44 +106,31 @@ const History: React.FC = () => {
         </div>
       )}
 
-      {/* Filters (always visible) */}
+      {/* Filters */}
       <div className={styles.filterRow} role="group" aria-label="Owner filters">
         {ownerFilters.map((f) => (
-          <button key={f.id}
-            className={`${styles.chip} ${f.active ? styles.chipActive : ''}`}
-            onClick={() => handleFilterClick('owner', f.id)}
-            aria-pressed={f.active} type="button">
+          <button key={f.id} className={`${styles.chip} ${f.active ? styles.chipActive : ''}`}
+            onClick={() => handleFilterClick('owner', f.id)} aria-pressed={f.active} type="button">
             {f.label}
           </button>
         ))}
       </div>
       <div className={styles.filterRow} role="group" aria-label="Wallet filters">
         {walletFilters.map((f) => (
-          <button key={f.id}
-            className={`${styles.chip} ${f.active ? styles.chipActive : ''}`}
-            onClick={() => handleFilterClick('wallet', f.id)}
-            aria-pressed={f.active} type="button">
+          <button key={f.id} className={`${styles.chip} ${f.active ? styles.chipActive : ''}`}
+            onClick={() => handleFilterClick('wallet', f.id)} aria-pressed={f.active} type="button">
             {f.label}
           </button>
         ))}
       </div>
 
-      {/* Summary (normal mode only) */}
+      {/* Summary (normal mode) */}
       {!isSelecting && summary.count > 0 && (
         <div className={styles.summary}>
           <span className={styles.summaryCount}>{summary.count} transaksi</span>
           <span className={summary.net >= 0 ? styles.summaryPos : styles.summaryNeg}>
             {summary.net >= 0 ? '+' : ''}{formatCurrency(summary.net)}
           </span>
-        </div>
-      )}
-
-      {/* Bulk delete bar (selection mode only) */}
-      {isSelecting && selectedCount > 0 && (
-        <div className={styles.bulkBar}>
-          <Button variant="destructive" size="sm" onClick={() => setShowBulkDeleteConfirm(true)}>
-            Delete {selectedCount}
-          </Button>
         </div>
       )}
 
@@ -166,7 +144,7 @@ const History: React.FC = () => {
       {/* Transaction list */}
       <div className={styles.listArea}>
         {groupedTransactions.length === 0 ? (
-          <EmptyState icon="🔍" title="Tidak ada transaksi"
+          <EmptyState icon={<HelpCircle size={40} />} title="Tidak ada transaksi"
             message={hasActiveFilters ? 'Coba ubah filter pencarian' : 'Tekan + untuk mencatat transaksi pertama'}
             actionLabel="Tambah Transaksi" onAction={() => navigate('/add')} />
         ) : (
@@ -190,11 +168,9 @@ const History: React.FC = () => {
                         </div>
                       )}
                       <div className={styles.txnCol}>
-                        <TransactionItem
-                          amount={txn.amount} type={txn.type}
-                          date={formatDateReadable(new Date(txn.date))}
-                          owner={txn.owner} walletName={walletName}
-                          categoryName={categoryName} note={txn.note} />
+                        <TransactionItem amount={txn.amount} type={txn.type}
+                          date={formatDateReadable(new Date(txn.date))} owner={txn.owner}
+                          walletName={walletName} categoryName={categoryName} note={txn.note} />
                       </div>
                     </div>
                   )
@@ -204,6 +180,16 @@ const History: React.FC = () => {
           ))
         )}
       </div>
+
+      {/* Bulk delete bar — fixed at bottom, always clickable */}
+      {isSelecting && selectedCount > 0 && (
+        <div className={styles.bulkBar}>
+          <Button variant="destructive" size="md" fullWidth
+            onClick={() => setShowBulkDeleteConfirm(true)}>
+            <span className={styles.bulkBtnInner}>Delete {selectedCount} Selected</span>
+          </Button>
+        </div>
+      )}
 
       <ConfirmDialog open={showBulkDeleteConfirm} onClose={() => setShowBulkDeleteConfirm(false)}
         onConfirm={handleBulkDelete} title="Hapus Transaksi"

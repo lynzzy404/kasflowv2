@@ -7,7 +7,7 @@ import Button from '@/shared/components/primitive/Button/Button'
 import styles from './EmptyState.module.css'
 
 export interface EmptyStateProps {
-  icon?: string
+  icon?: React.ReactNode
   title: string
   message?: string
   actionLabel?: string
@@ -16,7 +16,7 @@ export interface EmptyStateProps {
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({
-  icon = '📭',
+  icon,
   title,
   message,
   actionLabel,
