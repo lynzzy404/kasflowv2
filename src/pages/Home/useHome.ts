@@ -85,14 +85,6 @@ export function useHome() {
     [state.wallets],
   )
 
-  // Wallet type heuristic: shared if it has a wallet ID containing "seabank"
-  // or more than one owner with non-zero balance
-  const getWalletType = (walletId: string): 'shared' | 'personal' => {
-    const owners = calcWalletOwnerBalances(state.transactions, walletId)
-    const nonZeroOwners = owners.filter((ob) => ob.balance !== 0).length
-    return nonZeroOwners > 1 ? 'shared' : 'personal'
-  }
-
   const isGirlfriendNegative = girlfriendBalance < 0
 
   return {
@@ -104,7 +96,6 @@ export function useHome() {
     walletsWithBalance,
     recentTransactions,
     isGirlfriendNegative,
-    getWalletType,
     activeWalletCount: activeWallets.length,
     categoryMap,
     walletNameMap,

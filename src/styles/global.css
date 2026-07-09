@@ -380,40 +380,6 @@ img {
 }
 
 
-/* ----- Accessibility Utilities ----- */
-
-/* Screen-reader only (not visible, but accessible) */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* Skip to main content link */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--spacing-4);
-  padding: var(--spacing-2) var(--spacing-4);
-  background-color: var(--color-action-primary);
-  color: var(--color-text-inverse);
-  border-radius: var(--radius-xs);
-  z-index: var(--z-tooltip);
-  font-weight: var(--font-weight-medium);
-  transition: top var(--motion-base) var(--motion-easing);
-}
-
-.skip-link:focus {
-  top: var(--spacing-2);
-}
-
-
 /* ----- Reduced Transparency (Accessibility) ----- */
 @media (prefers-reduced-transparency: reduce) {
   *,

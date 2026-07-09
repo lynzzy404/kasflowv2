@@ -8,7 +8,8 @@ import OwnerBadge from '@/shared/components/business/OwnerBadge/OwnerBadge'
 import { formatCurrency } from '@/utils/formatting'
 import type { Owner, TransactionType } from '@/types/entities'
 
-// Extensible category icon map — add new entries here as categories grow
+import styles from './TransactionItem.module.css'
+
 const CATEGORY_ICONS: Record<string, string> = {
   Makan: '🍔',
   Belanja: '🛒',
@@ -21,11 +22,6 @@ const CATEGORY_ICONS: Record<string, string> = {
 export function getCategoryIcon(categoryName: string): string {
   return CATEGORY_ICONS[categoryName] || '💳'
 }
-
-// Lucide icon fallback for when categoryIcon prop is not provided
-// and the emoji-based CATEGORY_ICONS map returns the default '💳'
-// Future: replace CATEGORY_ICONS with a lucide-react icon map
-import styles from './TransactionItem.module.css'
 
 export interface TransactionItemProps {
   amount: number
