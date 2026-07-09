@@ -1,6 +1,5 @@
 // Home Screen
 // Composes: BalanceCard, WalletCard, TransactionItem, SectionHeader, Skeleton, EmptyState
-// Reference: docs/01-product/03_SCREEN_SPEC.md
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
